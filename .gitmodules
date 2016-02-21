@@ -1,0 +1,3 @@
+[submodule "dist"]
+	path = dist
+	url = https://github.com/sergeydyachenko/requireJS-1.git
