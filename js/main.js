@@ -1,4 +1,4 @@
-require(['Models/User', 'Router'], function(User, Router){
+require(['Models/User', 'routers/Router'], function(User, Router){
 
 	var users = [new User('Barney'),
 		new User('Cartman'),
