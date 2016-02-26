@@ -1,11 +1,12 @@
-define(['Views/ListView'], function(ListView){
+define(['jquery', 'underscore', 'backbone', 'Views/ListView'], function($, _, Backbone, ListView){
 
-	function start(){
-		var users = JSON.parse(localStorage.users);
-		ListView.render(users);
-	}
+	var ListController = Backbone.Model.extend({
+		initialize: function() {
+			var users = JSON.parse(localStorage.users);
+			var listView = new ListView();
+			listView.render(users);
+		}
+	});
 
-	return {
-		start:start
-	};
+	return ListController;
 });

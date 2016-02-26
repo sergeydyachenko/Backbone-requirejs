@@ -1,10 +1,28 @@
-require(['Models/User', 'routers/Router'], function(User, Router){
+require.config({
+	paths: {
+		jquery: 'libs/jquery',
+		underscore: 'libs/underscore',
+		backbone: 'libs/backbone'
+	},
+	shim: {
+		'underscore': {
+			exports: '_'
+		},
+		'backbone': {
+			deps: ['underscore', 'jquery'],
+			exports: 'Backbone'
+		}
+	}
 
-	var users = [new User('Barney'),
-		new User('Cartman'),
-		new User('Sheldon')];
+});
+define(['backbone', 'Models/User', 'routers/Router'], function(Backbone, User, Router){
+
+	var users = [new User({name:'Barney'}),
+		new User({name:'Cartman'}),
+		new User({name:'Sheldon'})];
 
 	localStorage.users = JSON.stringify(users);
 
-	Router.startRouting();
+	var router = new Router();
+	Backbone.history.start();
 });

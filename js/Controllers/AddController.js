@@ -1,23 +1,26 @@
-define(['Views/AddView', 'Models/User'], function(AddView, User){
+define(['jquery', 'underscore', 'backbone', 'Views/AddView', 'Models/User'], function($, _, Backbone, AddView, User){
 
-	function start(){
-		AddView.render();
-		bindEvents();
-	}
+	var AddController = Backbone.View.extend({
+		initialize: function() {
+			var addView = new AddView();
+			var users = new User();
+			addView.render(users);
+			this.render();
+		},
+		render: function() {
+			document.getElementById('add').addEventListener('click', function(){
+				var users = JSON.parse(localStorage.users);
 
-	function bindEvents(){
-		document.getElementById('add').addEventListener('click', function(){
-			var users = JSON.parse(localStorage.users);
-			var userName = document.getElementById('user-name').value;
-			users.push(new User(userName));
-			localStorage.users = JSON.stringify(users);
-			require(['Controllers/ListController'], function(ListController){
-				ListController.start();
-			});
-		}, false);
-	}
+				var userName = document.getElementById('user-name').value;
+				users.push(new User({name:userName}));
 
-	return {
-		start:start
-	};
+				localStorage.users = JSON.stringify(users);
+				require(['Controllers/ListController'], function(ListController){
+					var listController = new ListController();
+				});
+			}, false);
+		}
+	});
+
+	return AddController;
 });

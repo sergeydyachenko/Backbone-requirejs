@@ -1,8 +1,10 @@
-define(function(){
+define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
 
-	function User(name){
-		this.name = name || 'Default name';
-	}
+	var User = Backbone.Model.extend({
+		defaults: {
+			name: name || 'Default name'
+		}
+	});
 
 	return User;
 });

@@ -1,11 +1,11 @@
-define(function(){
+define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
 
-	function render(parameters){
-		var appDiv = document.getElementById('app');
-		appDiv.innerHTML = '<input id="user-name" /><button id="add">Add this user</button>';
-	}
+	var AddView = Backbone.View.extend({
+		render: function(parameters) {
+			var appDiv = document.getElementById('app');
+			appDiv.innerHTML = '<input id="user-name" /><button id="add">Add this user</button>';
+		}
+	});
 
-	return {
-		render:render
-	};
+	return AddView;
 });
